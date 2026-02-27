@@ -66,27 +66,87 @@
     // console.log(sounds)
     // console.log(keys[0])
     document.addEventListener("keydown", (event) => {
-      const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
-      const key = document.querySelector(`div[data-key="${event.keyCode}"]`);
+      const keyName = event.key;
+      console.log(keyName)
+      switch (keyName) {
+        case `a`:
+          keys[0].className = `key playing`;
+          sounds[0].play();
+          break;
+        case `s`:
+          keys[1].className = `key playing`;
+          sounds[1].play();
+          break;
+        case `d`:
+          keys[2].className = `key playing`;
+          sounds[2].play();
 
-      // stop function from running all together if key doesn't exist
-      if (!audio || !key) return;
-      key.classList.add(`playing`);
-      console.log(audio);
-      audio.currentTime = 0;
-      audio.play();
-      // setTimeout(() => {
-      //   key.classList.remove(`playing`);
+          break;
+        case `f`:
+          keys[3].className = `key playing`;
+          sounds[3].play();
 
-      // }, 0.07)
+          break;
+        case `g`:
+          keys[4].className = `key playing`;
+          sounds[4].play();
+
+          break;
+        case `h`:
+          keys[5].className = `key playing`;
+          sounds[5].play();
+
+          break;
+        case `j`:
+          keys[6].className = `key playing`;
+          sounds[6].play();
+
+          break;
+        case `k`:
+          keys[7].className = `key playing`;
+          sounds[7].play();
+
+          break;                
+        case `l`:
+          keys[8].className = `key playing`;
+          sounds[8].play();
+
+          break;
+      }
     })
 
     document.addEventListener("keyup", (event) => {
-      const key = document.querySelector(`div[data-key="${event.keyCode}"]`);
-      if (!key) return
-      console.log(key)
-      key.classList.remove(`playing`);
-
+      const keyName = event.key;
+      // console.log(keyName)
+      switch (keyName) {
+        case `a`:
+          keys[0].className = `key`;
+          break;
+        case `s`:
+          keys[1].className = `key`;
+          break;
+        case `d`:
+          keys[2].className = `key`;
+          break;
+        case `f`:
+          keys[3].className = `key`;
+          break;
+        case `g`:
+          keys[4].className = `key`;
+          break;
+        case `h`:
+          keys[5].className = `key`;
+          break;
+        case `j`:
+          keys[6].className = `key`;
+          break;
+        case `k`:
+          keys[7].className = `key`;
+          break;                
+        case `l`:
+          keys[8].className = `key`;
+          break;
+      }
     })
     // a.item(1).className = `key playing`;
   </script>
