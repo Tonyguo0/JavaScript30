@@ -14,7 +14,7 @@
     <div class="clock-face">
       <div class="hand hour-hand" style="transform-origin: 100%; transform: rotate(180deg);"></div>
       <div class="hand min-hand" style="transform-origin: 100%; transform: rotate(180deg);"></div>
-      <div class="hand second-hand" style="transform-origin: 100%; transform: rotate(30deg);"></div>
+      <div class="hand second-hand" style="transform-origin: 100%;"></div>
     </div>
   </div>
 
@@ -70,7 +70,16 @@
   </style>
 
   <script>
+    function hello() {
+      let num = 0;
+      setInterval(() => {
+        if(num==360) num=0
+        document.getElementsByClassName(`hand second-hand`)[0].style.transform = `rotate(${num+=6}deg)`;
+      }, 1000)
+    }
 
+
+    document.addEventListener(`DOMContentLoaded`, hello)
 
   </script>
 </body>
