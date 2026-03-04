@@ -14,7 +14,7 @@
     <div class="clock-face">
       <div class="hand hour-hand" style="transform-origin: 100%;"></div>
       <div class="hand min-hand" style="transform-origin: 100%;"></div>
-      <div class="hand second-hand" style="transform-origin: 100%;"></div>
+      <div class="hand second-hand" style="transform-origin: 100%; "></div>
     </div>
   </div>
 
@@ -69,22 +69,104 @@
       top: 50%;
       transform: rotate(90deg);
       /* this makes it snap back the animation currently we need to find a fix for this later */
-      /* transition: all 0.05s; */
-      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
     }
   </style>
 
   <script>
-    function hello() {
-      let num = 90;
-      setInterval(() => {
-        if (num == 450) num = 90
-        document.getElementsByClassName(`hand second-hand`)[0].style.transform = `rotate(${num += 6}deg)`;
-      }, 1000)
+
+    /**
+     * Old ways of doing it damn it is a mess here
+     * it kind of works but I'm not using setInterval correctly
+     * cos I'm trying to call setInterval inside a function which is triggered with DOMContentLoaded
+     * which doesn't make sense cos why do I need a event to load the setInterval when it is already doing
+     * that itself
+     */
+
+    // const hand = document.querySelector(`.hand`);
+
+    // function hello() {
+    //   const date = new Date(Date.now());
+    //   let sec = date.getSeconds() * 6 + 90;
+    //   let min = date.getMinutes() * 6 + 90;
+    //   document.getElementsByClassName(`hand min-hand`)[0].style.transform = `rotate(${min}deg)`;
+
+    //   const hour = date.getHours()
+    //   let hourDeg = hour >= 12 ? (hour - 12) * 36 + 90 : hour * 36 + 90;
+    //   document.getElementsByClassName(`hand hour-hand`)[0].style.transform = `rotate(${hourDeg}deg)`;
+
+
+    //   setInterval(() => {
+    //     if (sec == 450) sec = 90
+    //     if (sec == 90 || sec == 444 || sec == 96) {
+    //       hand.style.removeProperty(`transition`);
+    //       hand.style.removeProperty(`transition-timing-function`);
+    //     } else {
+    //       hand.style.transition = `all 0.05s`;
+    //     }
+    //     console.log(sec)
+    //     console.log(hand.style.transition)
+    //     console.log(hand.style)
+    //     document.getElementsByClassName(`hand second-hand`)[0].style.transform = `rotate(${sec += 6}deg)`;
+    //   }, 100)
+
+    //   setInterval(() => {
+    //     if (min == 450) min = 90
+    //     document.getElementsByClassName(`hand min-hand`)[0].style.transform = `rotate(${min += 6}deg)`;
+    //   }, 60000)
+
+    //   setInterval(() => {
+    //     if (hourDeg == 450) hourDeg = 90
+    //     document.getElementsByClassName(`hand hour-hand`)[0].style.transform = `rotate(${hourDeg += 6}deg)`;
+    //   }, 3600000)
+    // }
+
+    // document.addEventListener(`DOMContentLoaded`, hello)
+
+
+    const secondHand = document.querySelector(`.second-hand`);
+    const minuteHand = document.querySelector(`.min-hand`);
+    const hourHand = document.querySelector(`.hour-hand`);
+    const hand = document.querySelector(`.hand`);
+
+    function setDate() {
+      const now = new Date();
+      const sec = now.getSeconds()
+      console.log(sec)
+      const min = now.getMinutes()
+      const hour = now.getHours()
+      console.log(hand.style.transition)
+
+      sec == 59
+        || sec == 0
+        || sec == 1
+        || min == 59
+        || min == 0
+        || hour == 0
+        || hour == 12 ?
+        hand.style.removeProperty(`transition`) &&
+        hand.style.removeProperty(`transition-timing-function`)
+        :
+        hand.style.transition = `all 0.05s`;
+      console.log(hand.style.transition)
+      const secDegrees = ((sec / 60) * 360) + 90;
+      const minDegrees = ((min / 60) * 360) + 90;
+      const hourDegrees = (((hour >= 12 ? hour - 12 : hour) / 12) * 360) + 90;
+      secondHand.style.transform = `rotate(${secDegrees}deg)`
+      minuteHand.style.transform = `rotate(${minDegrees}deg)`
+      hourHand.style.transform = `rotate(${hourDegrees}deg)`
+      // console.log(minDegrees)
+      // console.log(hour)
+
+      // console.log(hourDegrees)
     }
 
+    setInterval(() => {
+      setDate();
+    }, 1000)
 
-    document.addEventListener(`DOMContentLoaded`, hello)
+
 
   </script>
 </body>
