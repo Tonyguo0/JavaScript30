@@ -12,16 +12,16 @@
 
   <div class="clock">
     <div class="clock-face">
-      <div class="hand hour-hand" style="transform-origin: 100%;"></div>
-      <div class="hand min-hand" style="transform-origin: 100%;"></div>
-      <div class="hand second-hand" style="transform-origin: 100%; "></div>
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
     </div>
   </div>
 
 
   <style>
     html {
-      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background: #CFEED6 url(./even_darker_pastel_green.png);
       background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
@@ -67,10 +67,31 @@
       background: black;
       position: absolute;
       top: 50%;
+      right: 50%;
       transform: rotate(90deg);
       /* this makes it snap back the animation currently we need to find a fix for this later */
-      transition: all 0.05s;
-      transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+      transition: all 1s;
+      transition-timing-function: cubic-bezier(1, 1, 2.7, 1);
+      transform-origin: 100%;
+    }
+
+    .second-hand {
+      height: 2px;
+      width: 50%;
+    }
+
+    .min-hand {
+      transition: all 1s;
+      height: 6.5px;
+    }
+
+    .hour-hand {
+      transition: all 1s;
+      height: 10px;
+      width: 40%;
+      transform-origin: 100%;
+      align-content: center;
+      align-items: center;
     }
   </style>
 
@@ -85,7 +106,8 @@
      */
 
     // const hand = document.querySelector(`.hand`);
-
+    // const secondHand = document.querySelector(`.second-hand`);
+    // const secondHand = document.querySelector(`.second-hand`);
     // function hello() {
     //   const date = new Date(Date.now());
     //   let sec = date.getSeconds() * 6 + 90;
@@ -98,17 +120,26 @@
 
 
     //   setInterval(() => {
-    //     if (sec == 450) sec = 90
-    //     if (sec == 90 || sec == 444 || sec == 96) {
-    //       hand.style.removeProperty(`transition`);
-    //       hand.style.removeProperty(`transition-timing-function`);
+    //     // if (sec == 450)
+    //     sec += 6
+    //     if (sec === 450 || sec === 90) {
+
+    //       sec = 90
+
+    //       // secondHand.style.transition = ``;
+    //       // hand.style.transition = ``;
+    //       secondHand.style.transition = `0s`;
+
+    //       // hand.getBoundingClientRect();
     //     } else {
-    //       hand.style.transition = `all 0.05s`;
+    //       secondHand.style.transition = `all 0.05s`;
     //     }
     //     console.log(sec)
-    //     console.log(hand.style.transition)
-    //     console.log(hand.style)
-    //     document.getElementsByClassName(`hand second-hand`)[0].style.transform = `rotate(${sec += 6}deg)`;
+
+    //     // console.log(hand.style.transition)
+    //     // console.log(hand.style)
+    //     secondHand.style.transform = `rotate(${sec}deg)`;
+
     //   }, 100)
 
     //   setInterval(() => {
@@ -138,17 +169,13 @@
       const hour = now.getHours()
       console.log(hand.style.transition)
 
-      sec == 59
-        || sec == 0
-        || sec == 1
-        || min == 59
-        || min == 0
-        || hour == 0
-        || hour == 12 ?
-        hand.style.removeProperty(`transition`) &&
-        hand.style.removeProperty(`transition-timing-function`)
-        :
-        hand.style.transition = `all 0.05s`;
+
+      sec == 0 ?
+        secondHand.style.transition = `none` : secondHand.style.transition = `all 0.05s cubic-bezier(0.19, 1, 0.22, 1)`;
+
+      min == 0 ?
+        minuteHand.style.transition = `none` : minuteHand.style.transition = `all 0.05s cubic-bezier(0.19, 1, 0.22, 1)`;
+
       console.log(hand.style.transition)
       const secDegrees = ((sec / 60) * 360) + 90;
       const minDegrees = ((min / 60) * 360) + 90;

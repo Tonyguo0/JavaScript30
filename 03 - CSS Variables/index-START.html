@@ -19,10 +19,19 @@
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img style="width: 1300px; height: 600px;" src="./iMo2edLRwk3cd.png" sizes="(width <= 600px) 500px, 50vw">
 
   <style>
+    :root{
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
 
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
