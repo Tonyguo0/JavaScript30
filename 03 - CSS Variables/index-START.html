@@ -25,9 +25,9 @@
 
   <style>
     :root {
-      --base: #ffc600;
+      --base: green;
       --spacing: 10px;
-      --blur: 10px;
+      --blur: 0px;
     }
 
     img {
@@ -63,6 +63,40 @@
   </style>
 
   <script>
+    const spacing = document.querySelector("#spacing")
+    const blur = document.querySelector("#blur")
+    const base = document.querySelector("#base")
+    // TODO: use querySelector all to inplement a nodelist version of this to shorten the code
+    const inputs = document.querySelectorAll(".controls input")
+    console.log(inputs)
+    const handleSpacingInput = () => {
+      const spacingValue = spacing.value
+      const suffix = spacing.dataset.sizing
+      // console.log(spacing.value);
+      // console.log(spacing.dataset.sizing)
+      document.documentElement.style.setProperty("--spacing", `${spacingValue}${suffix}`)
+    }
+    const handleBlurInput = () => {
+      const blurValue = blur.value
+      const suffix = blur.dataset.sizing
+      // console.log(blur.value);
+      // console.log(blur.dataset.sizing)
+      document.documentElement.style.setProperty("--blur", `${blurValue}${suffix}`)
+    }
+    const handleBaseInput = () => {
+      const baseValue = base.value
+      const suffix = base.dataset.sizing || ''
+      // console.log(baseValue);
+      // console.log(suffix)
+      document.documentElement.style.setProperty("--base", `${baseValue}${suffix}`)
+    }
+
+    spacing.addEventListener("input", handleSpacingInput)
+    // spacing.addEventListener("drag", handleSpacingInput)
+
+    blur.addEventListener("input", handleBlurInput)
+
+    base.addEventListener("input", handleBaseInput)
   </script>
 
 </body>
