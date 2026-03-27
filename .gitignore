@@ -3,3 +3,43 @@ node_modules/
 *.log
 haters/
 .idea/
+
+# OS / filesystem junk
+Thumbs.db
+Desktop.ini
+
+# Editor settings and temp files
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build and coverage output
+dist/
+build/
+out/
+coverage/
+.nyc_output/
+
+# Tool caches
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Runtime artifacts
+*.pid
+*.pid.lock
+*.seed
+
