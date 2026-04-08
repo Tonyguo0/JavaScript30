@@ -1,5 +1,17 @@
 # Learnings
 
-- *panels* is a flex container and inside of it we have 5 flex items which are the *panel*. We can use `display: flex` to create a flex container on each of the *panel* as well and then use `flex: 1` on the children of the *panel* aka the *p* html elements to make them grow and fill the available space equally. 
-- We can also do `flex-direction: column` on the *panel* to make the content inside of it stack vertically instead of horizontally.
-- we can do 
+- _panels_ is a flex container and inside of it we have 5 flex items which are the _panel_. We can use `display: flex` to create a flex container on each of the _panel_ as well and then use `flex: 1` on the children of the _panel_ aka the _p_ html elements to make them grow and fill the available space equally.
+- We can also do `flex-direction: column` on the _panel_ to make the content inside of it stack vertically instead of horizontally.
+- we can do `align-items: center` to center the content horizontally and `justify-content: center` to center the content vertically inside the _panel_.
+- We can use `background-size: cover` to make the background image cover the entire panel, and `background-position: center` to center the background image within the panel.
+- we can use `e.propertyName` to check which CSS property is being transitioned, and only remove the active class from the panel when the transition of the `flex` property has completed. This can help ensure that the visual effects are applied and removed at the right time, creating a smoother and more visually appealing user experience. By checking for the specific property being transitioned, we can avoid any unintended side effects or issues that may arise from removing the active class too early or too late in the transition process.
+- we can use `classList.toggle` to toggle a class on the clicked panel, which can be used to apply different styles or effects based on whether the panel is active or not. This allows us to create a more dynamic and interactive gallery that responds to user interactions in a fun and intuitive way.
+
+- We can use `transition: all 0.5s ease` to create a smooth transition effect when the panel is clicked and expands to fill the available space. This will make the user experience more enjoyable and visually appealing.
+- We can use `flex: 5` on the clicked panel to make it grow and fill the available space, while the other panels will shrink to `flex: 1` to create a dynamic and interactive layout. This allows us to create a visually engaging gallery that responds to user interactions in a fun and intuitive way.
+- We can use `cursor: pointer` to change the cursor to a pointer when hovering over the panels, indicating that they are clickable and enhancing the user experience by providing visual feedback that the panels are interactive elements on the page.
+- We can use `overflow: hidden` to hide any content that overflows the panel when it is expanded, which can help maintain a clean and organized layout and prevent any unwanted scrollbars from appearing.
+- We can use `box-shadow` to add a shadow effect to the panels, which can help create a sense of depth and make the panels stand out visually on the page. This can enhance the overall aesthetic of the gallery and make it more visually appealing to users.
+- We can use `transform: scale(1.1)` to create a zoom effect on the panel when it is clicked, which can help draw attention to the content and create a more engaging user experience. This can be especially effective when combined with the transition effect, as it can create a smooth and visually appealing animation that enhances the overall interactivity of the gallery.
+
+- We can use `querySelectorAll` to select all the panels and add an event listener to each of them, which allows us to create a more interactive and engaging gallery that responds to user interactions in a fun and intuitive way. This can be especially effective when combined with the `classList.toggle` method, as it allows us to easily apply different styles or effects to the panels based on their active state.
