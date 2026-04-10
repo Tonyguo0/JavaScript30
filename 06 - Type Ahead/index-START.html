@@ -1,23 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Type Ahead 👀</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="https://fav.farm/🔥" />
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Type Ahead 👀</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="https://fav.farm/🔥" />
+    </head>
+    <body>
+        <form class="search-form">
+            <input type="text" class="search" placeholder="City or State" />
+            <ul class="suggestions">
+                <li>Filter for a city</li>
+                <li>or a state</li>
+            </ul>
+        </form>
+        <script>
+            const endpoint =
+                'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json'
+            const cities = []
+            async function getData() {
+                try {
+                    const response = await fetch(endpoint)
+                    if (!response) throw new Error(`response is null`)
+                    const data = await response.json()
+                    cities.push(...data)
+                    console.log(data)
+                    console.log(cities)
+                } catch (error) {
+                    console.error(error.message)
+                }
+            }
 
-  <form class="search-form">
-    <input type="text" class="search" placeholder="City or State">
-    <ul class="suggestions">
-      <li>Filter for a city</li>
-      <li>or a state</li>
-    </ul>
-  </form>
-<script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+            getData()
 
-</script>
-</body>
+            function findMatches(wordToMatch, cities) {
+                return cities.filter((place) => {
+                    const regex = new RegExp(wordToMatch, 'gi')
+                    return place.city.match(regex) || place.state.match(regex)
+                    // place.city.includes(wordToMatch)
+                })
+            }
+        </script>
+    </body>
 </html>
