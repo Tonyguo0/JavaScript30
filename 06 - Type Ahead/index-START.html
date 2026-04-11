@@ -24,7 +24,6 @@
                     if (!response) throw new Error(`response is null`)
                     const data = await response.json()
                     cities.push(...data)
-                    console.log(data)
                     console.log(cities)
                 } catch (error) {
                     console.error(error.message)
@@ -40,6 +39,34 @@
                     // place.city.includes(wordToMatch)
                 })
             }
+            function displayMatches() {
+                const matchArray = findMatches(this.value, cities)
+                console.log(matchArray)
+                const html = matchArray
+                    .map((place) => {
+                        const regex = new RegExp(this.value, 'gi')
+                        const cityNameHl = place.city.replace(
+                            regex,
+                            `<span class="hl">${this.value}</span>` 
+                        );
+                        const stateNameHl = place.state.replace(
+                            regex,
+                            `<span class="hl">${this.value}</span>` 
+                        );
+                        return `
+                        <li>
+                            <span class="name">${cityNameHl}, ${stateNameHl}</span>
+                            <span class="population">${Number(place.population).toLocaleString()}</span>
+                        </li>
+                    `
+                    })
+                    .join('')
+                suggestions.innerHTML = html
+            }
+            const search = document.querySelector('.search')
+            const suggestions = document.querySelector('.suggestions')
+            search.addEventListener('change', displayMatches)
+            search.addEventListener('keyup', displayMatches)
         </script>
     </body>
 </html>
