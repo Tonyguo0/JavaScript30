@@ -96,13 +96,70 @@
         </div>
 
         <script>
-            const checkboxes = document.querySelector(`.inbox`)
-            console.log(checkboxes.children)
-            checkboxes.addEventListener('change', () => {
-              
-                console.log(checkboxes.querySelector('input').checked)
+            let firstChecked = ''
+            let secondCheck = ''
+            let shiftDown = false
+            const checkBoxes = document.querySelector(`.inbox`)
+            const checkBoxesList = document.querySelectorAll(`.inbox input[type='checkbox']`)
+            checkBoxesList.forEach((checkbox) => {
+                checkbox.addEventListener('click', handleCheck)
+                // console.log(checkbox.querySelector(`input`).checked)
+                // if (checkBoxes.querySelector('input').isEqualNode(secondCheck)) {
+                //     console.log(`is equal second node`)
+                // }
             })
-            console.log(checkboxes)
+
+            function handleCheck(e) {
+                let inBetween = false
+                console.log(e.shiftKey)
+                console.log(this.checked)
+                if (e.shiftKey && this.checked && firstChecked.checked) {
+                    // go ahead and check all the check boxes and tick them
+                    // loop every single checkbox
+                    checkBoxesList.forEach((checkbox) => {
+                        if (checkbox === this || checkbox === firstChecked) {
+                            inBetween = !inBetween
+                            console.log(`starting to check inbetween!`)
+                        }
+                        console.log(checkbox)
+                        if (inBetween) {
+                            checkbox.checked = true
+                        }
+                    })
+                }
+                // console.log(e)
+                // console.log(this)
+                firstChecked = this
+            }
+
+            checkBoxes.addEventListener(`change`, function (event) {
+                // console.log(this)
+                // this gets which input is being marked as checked or unchecked right now.
+                // console.log(event.target.checked)
+                // console.log(shiftDown)
+
+                if (shiftDown) {
+                    secondCheck = event.target
+                    // console.log(secondCheck)
+                } else {
+                    firstChecked = event.target
+                    // console.log(firstCheck)
+                }
+            })
+
+            document.addEventListener('keydown', function (event) {
+                // console.log(event.shiftKey)
+                shiftDown = event.shiftKey
+            })
+
+            document.addEventListener('keyup', function (event) {
+                // console.log(event.shiftKey)
+                shiftDown = event.shiftKey
+            })
+
+            // console.log(checkboxes.querySelector('input').checked)
+
+            // console.log(checkboxes)
         </script>
     </body>
 </html>
